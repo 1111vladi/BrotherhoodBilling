@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.mybrotherhood.MainLoginActivity">
+
+    <TextView
+        android:id="@+id/Brotherhood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:text="Welcome to Brotherhood!"
+        android:textColor="#000000"
+        android:textSize="30sp"
+         />
+
+
+    <EditText
+        android:id="@+id/addUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Brotherhood"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:hint="Username(Email)">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/addPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addUser"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Password"/>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_alignLeft="@+id/addPass"
+        android:layout_below="@+id/addPass"
+        android:layout_marginTop="40dp"
+        android:onClick="onClickLogin"
+        android:text="Login"/>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_alignBottom="@+id/loginBtn"
+        android:layout_alignRight="@+id/addPass"
+        android:onClick="onClickRegister"
+        android:text="Not Registered ?"/>
+</RelativeLayout>
