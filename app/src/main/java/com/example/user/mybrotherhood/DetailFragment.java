@@ -23,7 +23,7 @@ import java.util.List;
  * https://stackoverflow.com/questions/26621060/display-a-recyclerview-in-fragment
  */
 public class DetailFragment extends Fragment {
-
+//bitch
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
