@@ -1,4 +1,4 @@
-package com.example.user.mybrotherhood;
+package com.example.user.mybrotherhood.activities;
 
 import android.support.v7.app.AppCompatActivity;
 

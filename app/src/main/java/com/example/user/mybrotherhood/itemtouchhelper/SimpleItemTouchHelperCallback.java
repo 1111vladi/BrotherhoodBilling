@@ -1,4 +1,4 @@
-package com.example.user.mybrotherhood.ItemTouchHelper;
+package com.example.user.mybrotherhood.itemtouchhelper;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;

@@ -1,4 +1,4 @@
-package com.example.user.mybrotherhood.Adapters;
+package com.example.user.mybrotherhood.adapters;
 
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.user.mybrotherhood.Brotherhood;
-import com.example.user.mybrotherhood.CreateBrotherhoodActivity;
-import com.example.user.mybrotherhood.ItemTouchHelper.ItemTouchHelperAdapter;
-import com.example.user.mybrotherhood.MainBrotherhoodActivity;
+import com.example.user.mybrotherhood.itemtouchhelper.ItemTouchHelperAdapter;
+import com.example.user.mybrotherhood.activities.MainBrotherhoodActivity;
 import com.example.user.mybrotherhood.R;
 
 import java.util.Collections;

@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.user.mybrotherhood.Adapters.BrotherhoodRVAdapter;
-import com.example.user.mybrotherhood.ItemTouchHelper.SimpleItemTouchHelperCallback;
+import com.example.user.mybrotherhood.adapters.BrotherhoodRVAdapter;
+import com.example.user.mybrotherhood.itemtouchhelper.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;

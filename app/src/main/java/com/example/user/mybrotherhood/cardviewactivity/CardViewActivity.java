@@ -1,4 +1,4 @@
-package com.example.user.mybrotherhood.CardViewActivity;
+package com.example.user.mybrotherhood.cardviewactivity;
 
 import android.app.Activity;
 import android.os.Bundle;

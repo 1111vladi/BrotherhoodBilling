@@ -1,4 +1,4 @@
-package com.example.user.mybrotherhood;
+package com.example.user.mybrotherhood.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.user.mybrotherhood.Adapters.BrotherhoodRVAdapter;
-import com.example.user.mybrotherhood.Dialog.AddBrotherhoodDialog;
-import com.example.user.mybrotherhood.ItemTouchHelper.ItemTouchHelperAdapter;
-import com.example.user.mybrotherhood.ItemTouchHelper.SimpleItemTouchHelperCallback;
-import com.example.user.mybrotherhood.ItemTouchHelper.SimpleTouchHelperListener;
+import com.example.user.mybrotherhood.adapters.BrotherhoodRVAdapter;
+import com.example.user.mybrotherhood.Brotherhood;
+import com.example.user.mybrotherhood.dialog.AddBrotherhoodDialog;
+import com.example.user.mybrotherhood.itemtouchhelper.SimpleItemTouchHelperCallback;
+import com.example.user.mybrotherhood.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;

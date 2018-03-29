@@ -1,4 +1,4 @@
-package com.example.user.mybrotherhood.ItemTouchHelper;
+package com.example.user.mybrotherhood.itemtouchhelper;
 
 /**
  * Created by PC on 26-Mar-18.

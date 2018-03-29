@@ -16,12 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".CreateBrotherhoodActivity"/>
-        <activity android:name=".MainBrotherhoodActivity"/>
-        <activity android:name=".CardViewActivity.CardViewActivity"/>
-
-
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.CreateBrotherhoodActivity" />
+        <activity android:name=".activities.MainBrotherhoodActivity" />
+        <activity android:name=".cardviewactivity.CardViewActivity" />
     </application>
 
 </manifest>
