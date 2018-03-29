@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.user.mybrotherhood.Brotherhood;
 import com.example.user.mybrotherhood.itemtouchhelper.ItemTouchHelperAdapter;
-import com.example.user.mybrotherhood.activities.MainBrotherhoodActivity;
+import com.example.user.mybrotherhood.activities.BrotherhoodTabs;
 import com.example.user.mybrotherhood.R;
 
 import java.util.Collections;
@@ -36,7 +36,7 @@ public class BrotherhoodRVAdapter extends RecyclerView.Adapter<BrotherhoodRVAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    view.getContext().startActivity(new Intent(view.getContext(), MainBrotherhoodActivity.class));
+                    view.getContext().startActivity(new Intent(view.getContext(), BrotherhoodTabs.class));
                 }
             });
         }

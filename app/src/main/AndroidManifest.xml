@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.CreateBrotherhoodActivity" />
-        <activity android:name=".activities.MainBrotherhoodActivity" />
+        <activity android:name=".activities.BrotherhoodTabs" />
         <activity android:name=".cardviewactivity.CardViewActivity" />
     </application>
 
