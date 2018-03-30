@@ -27,6 +27,8 @@ import java.util.Set;
 
 public class CreateBrotherhoodActivity extends AppCompatActivity implements AddBrotherhoodDialog.AddBrotherhoodDialogListener{
 
+
+
     private List<Brotherhood> brotherhoods;
     private RecyclerView rv;
     private SharedPreferences prefs;
@@ -48,6 +50,7 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
         rv.setLayoutManager(llm);
 
         prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
 
 
         initializeData();
@@ -153,4 +156,6 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
         // Secondly overwrite the new list(StringSet) in the share preference
         prefs.edit().putStringSet(broNames,brotherhoodNames).apply();
     }
+
+
 }

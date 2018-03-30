@@ -1,65 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.user.mybrotherhood.MainLoginActivity">
-
-    <TextView
-        android:id="@+id/Brotherhood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
-        android:text="Welcome to Brotherhood!"
-        android:textColor="#000000"
-        android:textSize="30sp"
-         />
 
 
-    <EditText
-        android:id="@+id/addUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Brotherhood"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:ems="10"
-        android:hint="Username(Email)">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_100"
+        android:orientation="vertical"
+        android:weightSum="4"
+        tools:context="com.example.user.mybrotherhood.activities.MainLoginActivity">
 
-        <requestFocus />
-    </EditText>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/addPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/addUser"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Password"/>
+            <ImageView
+                style="@style/ThemeOverlay.FirebaseIcon"
+                android:id="@+id/google_icon"
+                android:contentDescription="@string/desc_firebase_lockup"
+                android:src="@drawable/firebase_lockup_400"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:layout_alignLeft="@+id/addPass"
-        android:layout_below="@+id/addPass"
-        android:layout_marginTop="40dp"
-        android:onClick="onClickLogin"
-        android:text="Login"/>
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/title_bottom_margin"
+                android:text="@string/google_title_text"
+                android:theme="@style/ThemeOverlay.MyTitleText" />
 
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:layout_alignBottom="@+id/loginBtn"
-        android:layout_alignRight="@+id/addPass"
-        android:onClick="onClickRegister"
-        android:text="Not Registered ?"/>
-</RelativeLayout>
+            <TextView
+                android:id="@+id/status"
+                style="@style/ThemeOverlay.MyTextDetail"
+                android:text="@string/signed_out" />
+
+            <TextView
+                android:id="@+id/detail"
+                style="@style/ThemeOverlay.MyTextDetail"
+                tools:text="Firebase User ID: 123456789abc" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/grey_300">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible"
+                tools:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/sign_out_and_disconnect"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <Button
+                    android:id="@+id/sign_out_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/sign_out"
+                    android:theme="@style/ThemeOverlay.MyDarkButton" />
+
+                <Button
+                    android:id="@+id/disconnect_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/disconnect"
+                    android:theme="@style/ThemeOverlay.MyDarkButton" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>

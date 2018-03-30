@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "114811624786",
+    "firebase_url": "https://mybrotherhood-75919.firebaseio.com",
+    "project_id": "mybrotherhood-75919",
+    "storage_bucket": "mybrotherhood-75919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114811624786:android:6ef643196cce9c8f",
+        "android_client_info": {
+          "package_name": "com.example.user.googlesignin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114811624786-buj5qheuqkd05motv33lt4a59p00lcdi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.googlesignin",
+            "certificate_hash": "ca8fedd434278ce1e894e2d04118470f69e54428"
+          }
+        },
+        {
+          "client_id": "114811624786-qhhor4cs59q19uqi4o6uthnn3jspkggc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.googlesignin",
+            "certificate_hash": "344da3a75d17bc5dd1b4178d4c0e72fd934485e1"
+          }
+        },
+        {
+          "client_id": "114811624786-nu4kgolv830tvuvb7hcnn285c67tdeao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgDYKW6Xi1orXaFKJP1uEA-5gyUSD6Yaw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114811624786-nu4kgolv830tvuvb7hcnn285c67tdeao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114811624786:android:b778ddf9110bd9c1",
+        "android_client_info": {
+          "package_name": "com.example.user.mybrotherhood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114811624786-rsjneleja8mdj9dp6tp3v72vfqaqbdv6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.mybrotherhood",
+            "certificate_hash": "344da3a75d17bc5dd1b4178d4c0e72fd934485e1"
+          }
+        },
+        {
+          "client_id": "114811624786-n89eo09qdu73f03p677lk2ag6ji9kjti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.mybrotherhood",
+            "certificate_hash": "ca8fedd434278ce1e894e2d04118470f69e54428"
+          }
+        },
+        {
+          "client_id": "114811624786-nu4kgolv830tvuvb7hcnn285c67tdeao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgDYKW6Xi1orXaFKJP1uEA-5gyUSD6Yaw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114811624786-nu4kgolv830tvuvb7hcnn285c67tdeao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

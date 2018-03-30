@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainLoginActivity">
+        <activity android:name=".activities.MainLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,7 @@
         <activity android:name=".activities.CreateBrotherhoodActivity" />
         <activity android:name=".activities.BrotherhoodTabs" />
         <activity android:name=".cardviewactivity.CardViewActivity" />
+        <activity android:name=".activities.BaseActivity"/>
     </application>
 
 </manifest>
