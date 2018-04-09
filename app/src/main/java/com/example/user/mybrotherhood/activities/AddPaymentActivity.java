@@ -16,7 +16,9 @@ public class AddPaymentActivity extends AppCompatActivity {
     // There will be two fields
     // Amount - The user will input a float amount
     // Category - Open a fragment which will have all the categories and new categories could be insert
-    // and saved in the DB , the categories will be shown in a RecyclerView
+    // and saved in the DB , the categories will be shown in a RecyclerView OR --
+    // -- Will be a recycler view which can select which category and could add new ones with
+    // a Floatbutton and will be saved.
 
 
     @Override

@@ -21,6 +21,7 @@
         <activity android:name=".activities.BrotherhoodTabs" />
         <activity android:name=".cardviewactivity.CardViewActivity" />
         <activity android:name=".activities.BaseActivity"/>
+        <activity android:name=".activities.AddPaymentActivity" />
     </application>
 
 </manifest>

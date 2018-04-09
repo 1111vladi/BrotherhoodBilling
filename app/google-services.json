@@ -67,6 +67,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "114811624786-snksiqmvlvs1l3i4atfuh6l9knsei1tb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.mybrotherhood",
+            "certificate_hash": "17de6f6c05ea2f08bb01094a2efd949e9b967de0"
+          }
+        },
+        {
+          "client_id": "114811624786-vfn3p8hvg0gj5qcbq4td2bu6gq2979jh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.mybrotherhood",
+            "certificate_hash": "9d88acf45d2a9465d26083985a47b2db7477d049"
+          }
+        },
+        {
           "client_id": "114811624786-rsjneleja8mdj9dp6tp3v72vfqaqbdv6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

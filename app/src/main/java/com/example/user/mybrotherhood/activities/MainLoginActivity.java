@@ -210,8 +210,8 @@ public class MainLoginActivity extends BaseActivity implements
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
             // TODO - Use this to enter the next Activity and cancel it to sign out
-            /*Intent intent = new Intent(this, CreateBrotherhoodActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(this, CreateBrotherhoodActivity.class);
+            startActivity(intent);
 
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
