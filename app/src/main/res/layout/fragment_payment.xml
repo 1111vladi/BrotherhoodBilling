@@ -4,5 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.user.mybrotherhood.fragments.Payment">
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabDebt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_add"
+        android:layout_margin="16dp"
+        android:onClick="additem"
+        />
 </FrameLayout>
