@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// Todo - Change fragment v4 to newer (v7)
 
 public class Debt extends Fragment {
     ExpandableListAdapter listAdapter;

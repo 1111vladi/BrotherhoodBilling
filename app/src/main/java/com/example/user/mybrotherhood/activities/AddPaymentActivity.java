@@ -1,9 +1,13 @@
 package com.example.user.mybrotherhood.activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
+import com.example.user.mybrotherhood.DetailFragment;
 import com.example.user.mybrotherhood.R;
 
 /**
@@ -22,9 +26,18 @@ public class AddPaymentActivity extends AppCompatActivity {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState,PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.activity_add_spent);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_payment);
+        // get fragment manager
+        FragmentManager fm = getFragmentManager();
+
+// add
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.list_container, new DetailFragment());
+// alternatively add it with a tag
+// trx.add(R.id.your_placehodler, new YourFragment(), "detail");
+        ft.commit();
 
     }
 
@@ -39,5 +52,8 @@ public class AddPaymentActivity extends AppCompatActivity {
 // alternatively add it with a tag
 // trx.add(R.id.your_placehodler, new YourFragment(), "detail");
         ft.commit();*/
+    }
+
+    public void addPayment(View view) {
     }
 }

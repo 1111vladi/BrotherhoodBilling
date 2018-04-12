@@ -237,4 +237,8 @@ public class MainLoginActivity extends BaseActivity implements
             revokeAccess();
         }
     }
+
+    public void toFragment(View view) {
+        startActivity(new Intent(this,AddPaymentActivity.class));
+    }
 }

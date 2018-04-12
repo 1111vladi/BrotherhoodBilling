@@ -10,7 +10,7 @@ import com.example.user.mybrotherhood.fragments.Payment;
 /**
  * Created by tommy on 29/03/2018.
  */
-
+// Todo - Change fragment v4 to newer (v7)
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 
