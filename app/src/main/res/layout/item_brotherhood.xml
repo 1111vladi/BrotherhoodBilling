@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/brotherhoodCv"
-    card_view:cardCornerRadius="5dp"
+    android:id="@+id/cv_brotherhood"
+    card_view:cardCornerRadius="@dimen/cv_corner_radius"
     card_view:cardUseCompatPadding="true"
 
     >
@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/cv_padding"
         >
 
 

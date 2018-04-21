@@ -3,57 +3,48 @@ package com.example.user.mybrotherhood.activities;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
-import com.example.user.mybrotherhood.DetailFragment;
 import com.example.user.mybrotherhood.R;
+import com.example.user.mybrotherhood.fragments.AddPaymnet;
 
 /**
- * Activity where the user use to add payment (item) - Name can be changed to better compatibility
+ * Activity where the user use to add payment (item_brotherhood) - Name can be changed to better compatibility
  */
 
-public class AddPaymentActivity extends AppCompatActivity {
+public class AddPaymentActivity extends AppCompatActivity{
 
-    // Start this activity from Floatbutton at the activity MainBrotherhood at the fragment DebtFragment
-    // There will be two fields
-    // Amount - The user will input a float amount
-    // Category - Open a fragment which will have all the categories and new categories could be insert
-    // and saved in the DB , the categories will be shown in a RecyclerView OR --
-    // -- Will be a recycler view which can select which category and could add new ones with
-    // a Floatbutton and will be saved.
 
+    private String selectedCategoryName;
+    private TextView amount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_payment);
-        // get fragment manager
+        // Get fragment manager
         FragmentManager fm = getFragmentManager();
 
-// add
+        // Add fragment from the class AddPayment
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.list_container, new DetailFragment());
-// alternatively add it with a tag
-// trx.add(R.id.your_placehodler, new YourFragment(), "detail");
+        ft.add(R.id.list_container_payment, new AddPaymnet());
         ft.commit();
 
+        amount = (TextView) findViewById(R.id.et_amount);
     }
 
 
-    private void addCategoryFragment(){
-         /*  // get fragment manager
-        FragmentManager fm = getFragmentManager();
-
-// add
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.list_container, new DetailFragment());
-// alternatively add it with a tag
-// trx.add(R.id.your_placehodler, new YourFragment(), "detail");
-        ft.commit();*/
-    }
-
+    // Button Add Payment
     public void addPayment(View view) {
+        System.out.println("Name: " + selectedCategoryName + ", amount: " + amount.getText().toString()); // TEST
+        // TODO - add the categoryName + amount to the DB
+
+    }
+
+    public void setSelectedCategoryName(String categoryName){
+        selectedCategoryName = categoryName;
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.user.mybrotherhood.adapters.BrotherhoodRVAdapter;
 import com.example.user.mybrotherhood.Brotherhood;
+import com.example.user.mybrotherhood.adapters.CategoryRVAdapter;
 import com.example.user.mybrotherhood.dialog.AddBrotherhoodDialog;
 import com.example.user.mybrotherhood.itemtouchhelper.SimpleItemTouchHelperCallback;
 import com.example.user.mybrotherhood.R;
@@ -44,27 +45,14 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rv_brotherhood_layout);
 
-
         rv = (RecyclerView)findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
         prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-
-
         initializeData();
         initializeAdapter();
-
-      /*  // get fragment manager
-        FragmentManager fm = getFragmentManager();
-
-// add
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.list_container, new DetailFragment());
-// alternatively add it with a tag
-// trx.add(R.id.your_placehodler, new YourFragment(), "detail");
-        ft.commit();*/
 
     }
 
@@ -77,16 +65,14 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
     }
 
     private void initializeData(){
-        // TODO - Get the brotherhoods from the DB
+        // TODO - Get the brotherhoods from the DB, Maybe do a class to do all the database transitions
         brotherhoods = new ArrayList<>();
         // Get a set of all the names from the shared preference
         Set<String> names = prefs.getStringSet(broNames ,null);
         if (names != null){
             // Add the set to the hashset brotherhoodNames
             brotherhoodNames.addAll(names);
-        }
 
-        if(brotherhoodNames != null){
             // Add the names to the recycleview
             for(String name : brotherhoodNames ){
                 addBrotherhoodList(name);
@@ -99,14 +85,14 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
         adapter = new BrotherhoodRVAdapter(brotherhoods);
         rv.setAdapter(adapter);
 
-        //  TEST - Get the item which was removed from the RecyclerView Brotherhood ->
+        //  TEST - Get the item_brotherhood which was removed from the RecyclerView Brotherhood ->
         //  To remove from the storage (DB, Shared preference..)
         adapterObserver = new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeRemoved(int positionStart, int itemCount) {
                 super.onItemRangeRemoved(positionStart, itemCount);
                 strItemRemoved = brotherhoods.get(positionStart).brotherhoodName;
-                removeItemSP(strItemRemoved);
+                removeItemDB(strItemRemoved);
             }
         };
 
@@ -116,7 +102,8 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
         touchHelper.attachToRecyclerView(rv);
     }
 
-    // Start alert after the addFloadButton was touched
+    // -- Dialog Start --
+    // Start alert after the FloadButton was presses
     public void addBrotherhood(View view) {
         AddBrotherhoodDialog addBrotherhoodDialog = new AddBrotherhoodDialog();
         addBrotherhoodDialog.show(getFragmentManager(),"addBrother");
@@ -127,13 +114,15 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
     @Override
     public void positiveClicked(String result) {
         // TODO - Add the brotherhood in DB
-        // Add the name to the set
-        brotherhoodNames.add(result);
-        // Then save in the shared preference
-        prefs.edit().putStringSet(broNames, brotherhoodNames).apply();
-        // Eventually add to the recycleview
-        addBrotherhoodList(result);
-        Toast.makeText(this,"Added " + result, Toast.LENGTH_SHORT).show();
+        if(result != null && !result.isEmpty()){
+            // Add the name to the set
+            brotherhoodNames.add(result);
+            // Then save in the shared preference
+            prefs.edit().putStringSet(broNames, brotherhoodNames).apply();
+            // Eventually add to the recycleview
+            addBrotherhoodList(result);
+            Toast.makeText(this,"Added " + result, Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -143,19 +132,19 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements AddB
         Toast.makeText(this,"Canceled", Toast.LENGTH_SHORT).show();
 
     }
+    // -- Dialog End --
 
     private void addBrotherhoodList(String name){
         brotherhoods.add(new Brotherhood(name));
     }
 
-    // Remove the item from the storage (DB, SharePrefs...)
-    // TODO - Remove from DB the item
-    private void removeItemSP(String itemName){
-        // First remove the item from the RecyclerView
+    // Remove the item_brotherhood from the storage (DB, SharePrefs...)
+    // TODO - Remove from DB the item_brotherhood
+    private void removeItemDB(String itemName){
+        // First remove the item_brotherhood from the RecyclerView
         brotherhoodNames.remove(itemName);
         // Secondly overwrite the new list(StringSet) in the share preference
         prefs.edit().putStringSet(broNames,brotherhoodNames).apply();
     }
-
 
 }

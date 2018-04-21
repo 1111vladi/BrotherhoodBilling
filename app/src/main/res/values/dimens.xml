@@ -12,4 +12,9 @@
     <!-- Text Dimensions -->
     <dimen name="text_size_normal">24sp</dimen>
     <dimen name="text_length_normal">100dp</dimen>
+
+    <!-- CardView -->
+    <dimen name="cv_corner_radius">5dp</dimen>
+    <dimen name="cv_padding">16dp</dimen>
+
 </resources>

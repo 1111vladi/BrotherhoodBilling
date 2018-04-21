@@ -30,7 +30,7 @@ public class BrotherhoodRVAdapter extends RecyclerView.Adapter<BrotherhoodRVAdap
 
         public BrotherhoodViewHolder(View itemView) {
             super(itemView);
-            brotherhoodCv = (CardView)itemView.findViewById(R.id.brotherhoodCv);
+            brotherhoodCv = (CardView)itemView.findViewById(R.id.cv_brotherhood);
             brotherhoodName = (TextView)itemView.findViewById(R.id.brotherhoodName);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class BrotherhoodRVAdapter extends RecyclerView.Adapter<BrotherhoodRVAdap
 
     @Override
     public BrotherhoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_brotherhood, parent, false);
         BrotherhoodViewHolder bvh = new BrotherhoodViewHolder(view);
         return bvh;
     }

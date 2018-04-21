@@ -1,54 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.user.mybrotherhood.activities.AddPaymentActivity">
+    android:layout_height="wrap_content"
+    tools:context="com.example.user.mybrotherhood.activities.AddPaymentActivity"
+    android:padding="@dimen/cv_padding"
+    android:orientation="vertical"
+    android:weightSum="100"
+    >
 
-    <TextView
-        android:id="@+id/tv_amount"
-        android:layout_width="@dimen/text_length_normal"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:text="@string/label_amount"
-        android:textSize="@dimen/text_size_normal"
-        />
+    <!--Amount label with number input-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        >
 
-    <!-- Edit text of amount -->
-    <EditText
-        android:id="@+id/et_amount"
-        android:layout_width="@dimen/text_length_normal"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:textSize="@dimen/text_size_normal"
-        android:layout_toEndOf="@+id/tv_amount"
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="@dimen/text_length_normal"
+            android:layout_height="wrap_content"
+            android:text="@string/label_amount"
+            android:textSize="@dimen/text_size_normal"
+            />
 
-        />
+        <!-- Edit text of amount -->
+        <EditText
+            android:id="@+id/et_amount"
+            android:layout_width="@dimen/text_length_normal"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/text_size_normal"
+
+            />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_category"
         android:layout_width="@dimen/text_length_normal"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_amount"
+        android:layout_height="0dp"
         android:textSize="@dimen/text_size_normal"
         android:text="@string/label_category"
+        android:layout_weight="7"
         />
-    <!-- Button to add the payment -->
+
     <FrameLayout
-        android:id="@+id/list_container"
+        android:id="@+id/list_container_payment"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_category"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:layout_weight="73"
         />
 
+    <!-- Button to add the payment -->
     <Button
-        android:id="@+id/brn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/list_container"
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Add"
         android:onClick="addPayment"
+        android:layout_weight="10"
         />
 
 
 
-</RelativeLayout>
+
+
+</LinearLayout>

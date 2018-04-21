@@ -5,11 +5,13 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        android:textSize="16sp"
-       android:focusableInTouchMode="true"/>
+       android:id="@+id/name"
+       android:layout_width="@dimen/text_length_normal"
+       android:layout_height="wrap_content"
+       android:hint="Name"
+       android:inputType="text"
+       android:textSize="36sp"
+        android:layout_gravity="center"
+       />
 
 </LinearLayout>
