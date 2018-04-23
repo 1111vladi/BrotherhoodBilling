@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@android:color/holo_blue_dark">
+
+  <TextView
+      android:id="@+id/list_item_member_name"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="20dp"
+      android:gravity="center_vertical"
+      android:textColor="@android:color/background_light"
+      tools:text="brotherhood member" />
+
+  <TextView
+      android:id="@+id/amount"
+      android:layout_width="60dp"
+      android:layout_height="match_parent"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentTop="true"
+      android:layout_marginEnd="103dp"
+      android:gravity="center"
+      android:text="100"
+      android:textColor="@android:color/black" />
+
+  <ImageView
+      android:id="@+id/list_item_member_arrow"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:layout_gravity="center_vertical|end"
+      android:layout_marginEnd="16dp"
+      android:src="@drawable/ic_arrow_down" />
+
+</RelativeLayout>
+

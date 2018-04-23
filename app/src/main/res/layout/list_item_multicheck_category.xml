@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="48dp">
+
+  <CheckedTextView
+    android:id="@+id/list_item_multicheck_category_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="72dp"
+    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+    android:gravity="center"
+    android:textAllCaps="true"
+    tools:text="Category name" />
+
+  <TextView
+      android:layout_width="60dp"
+      android:layout_height="match_parent"
+      android:layout_alignEnd="@+id/list_item_multicheck_category_name"
+      android:layout_alignParentTop="true"
+      android:layout_marginEnd="38dp"
+      android:gravity="center"
+      android:text="100" />
+
+</RelativeLayout>

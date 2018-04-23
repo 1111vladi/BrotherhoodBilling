@@ -23,7 +23,7 @@ import java.util.List;
  * https://stackoverflow.com/questions/26621060/display-a-recyclerview-in-fragment
  */
 public class DetailFragment extends Fragment {
-//bitch
+    //bitch
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
@@ -87,6 +87,7 @@ public class DetailFragment extends Fragment {
     /**
      * Set RecyclerView's LayoutManager to the one given.
      * ----- Not that important for our project --------
+     *
      * @param layoutManagerType Type of layout manager to switch to.
      */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
@@ -128,7 +129,7 @@ public class DetailFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset =  new ArrayList<>();
+        mDataset = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             mDataset.add(new Brotherhood("This is element " + i));
         }
