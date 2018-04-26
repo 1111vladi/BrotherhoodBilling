@@ -51,7 +51,7 @@ public class AddBrotherhoodDialog extends DialogFragment {
         final EditText name = (EditText) viewInfalted.findViewById(R.id.name);
 
         builder.setView(viewInfalted)
-                .setPositiveButton("Yep", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     // Positive is clicked and transfer the name which was written
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -59,7 +59,7 @@ public class AddBrotherhoodDialog extends DialogFragment {
                         mListener.positiveClicked(result);
                     }
                 })
-                .setNegativeButton("Nop", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     // Negative is clicked and transfer the name which was written
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

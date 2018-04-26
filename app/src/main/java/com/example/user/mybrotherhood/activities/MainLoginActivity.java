@@ -1,9 +1,13 @@
 package com.example.user.mybrotherhood.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 
@@ -58,14 +62,28 @@ public class MainLoginActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Change Status bar background
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.black));
+
+
+
         // Views
         mStatusTextView = findViewById(R.id.status);
         mDetailTextView = findViewById(R.id.detail);
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
+
+
 
         // ----- START config_sign in -----
         // Configure Google Sign In
@@ -93,7 +111,7 @@ public class MainLoginActivity extends BaseActivity implements
 
     }
 
-    // ----- START on_start_check_user -----
+    // ------------ onStart check user START ------------
     @Override
     public void onStart() {
         super.onStart();
@@ -103,10 +121,10 @@ public class MainLoginActivity extends BaseActivity implements
             updateUI(currentUser);
         }
     }
-    // ----- END on_start_check_user -----
+    // ------------ onStart check user END ------------
 
 
-    // ----- START onActivityResult -----
+    // ------------  onActivityResult START  ------------
     @SuppressLint("RestrictedApi")
     @Override
     // onActivityResult(int requestCode, int resultCode, Intent data)
@@ -130,11 +148,11 @@ public class MainLoginActivity extends BaseActivity implements
             }
         }
     }
-    // ----- END onActivityResult -----
+    // ------------  onActivityResult END  ------------
 
 
 
-    // ----- START auth_with_google -----
+    // ------------  firebaseAuthWithGoogle START ------------
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
@@ -164,7 +182,7 @@ public class MainLoginActivity extends BaseActivity implements
                     }
                 });
     }
-    // [END auth_with_google]
+    // ------------  firebaseAuthWithGoogle END ------------
 
     // [START signin]
     private void signIn() {
@@ -188,39 +206,25 @@ public class MainLoginActivity extends BaseActivity implements
                 });
     }
 
-    @SuppressLint("RestrictedApi")
-    private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
 
-        // GoogleSignInClient extends GoogleApi<GoogleSignInOptions>
-        // Revokes access given to the current application.
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(null);
-                    }
-                });
-    }
 
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-            // TODO - Use this to enter the next Activity and cancel it to sign out
             Intent intent = new Intent(this, CreateBrotherhoodActivity.class);
             startActivity(intent);
 
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            finish();
+
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+
         }
     }
 
@@ -233,8 +237,6 @@ public class MainLoginActivity extends BaseActivity implements
             signIn();
         } else if (i == R.id.sign_out_button) {
             signOut();
-        } else if (i == R.id.disconnect_button) {
-            revokeAccess();
         }
     }
 
