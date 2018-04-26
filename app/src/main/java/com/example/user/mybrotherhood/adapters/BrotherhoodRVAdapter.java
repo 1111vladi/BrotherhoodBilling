@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.user.mybrotherhood.Brotherhood;
+import com.example.user.mybrotherhood.FirebaseBrotherhood;
 import com.example.user.mybrotherhood.itemtouchhelper.ItemTouchHelperAdapter;
 import com.example.user.mybrotherhood.activities.BrotherhoodTabs;
 import com.example.user.mybrotherhood.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +38,8 @@ public class BrotherhoodRVAdapter extends RecyclerView.Adapter<BrotherhoodRVAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    System.out.println("*******************" + brotherhoodName.getText().toString());
+                    FirebaseBrotherhood.setBrotherhoodName(brotherhoodName.getText().toString());
                     view.getContext().startActivity(new Intent(view.getContext(), BrotherhoodTabs.class));
                 }
             });

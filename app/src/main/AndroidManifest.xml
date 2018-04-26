@@ -31,7 +31,8 @@
         <activity android:name=".cardviewactivity.CardViewActivity" />
         <activity android:name=".activities.BaseActivity"/>
         <activity android:name=".activities.AddPaymentActivity" />
-        <activity android:name=".activities.AddMemberActivity" />
+        <activity android:name=".activities.ShowUsersActivity" />
+        <activity android:name=".activities.FoundUserActivity" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.user.mybrotherhood.adapters.BrotherhoodRVAdapter;
@@ -25,10 +26,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-/**
- * Created by user on 3/21/2018.
- */
 
 
 import android.content.Intent;
@@ -48,6 +45,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by user on 3/21/2018.
  */
@@ -62,9 +62,6 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
     private static final String TAG_DB = "tag_db";
     private List<Brotherhood> brotherhoods;
     private RecyclerView rv;
-    private SharedPreferences prefs;
-    private static final String PREF_NAME = "brotherhood_names", broNames = "names";
-    private Set<String> brotherhoodNames = new HashSet<>();
     private ItemTouchHelper touchHelper;
     private RecyclerView.AdapterDataObserver adapterObserver;
     private BrotherhoodRVAdapter adapter;
@@ -82,29 +79,27 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rv_brotherhood_layout);
-        brotherhoods = new ArrayList<>();
 
+        brotherhoods = new ArrayList<>();
+        // Initiate FirebaseDatabase
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Users");
         mAuth = FirebaseAuth.getInstance();
 
-        String userGoogleEmail = mAuth.getCurrentUser().getEmail();
-        String[] arr = userGoogleEmail.split("@");
-        user = arr[0];
+        user = mAuth.getCurrentUser().getDisplayName();
         connectToDB("Users", user);
-
 
 
         // Change Status bar background
         Window window = this.getWindow();
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
+        // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-// finally change the color
+        // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.grey_500));
 
 
@@ -123,10 +118,6 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // Initiate FirebaseDatabase
-
-//        prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
         initializeData();
 
@@ -184,25 +175,11 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
                     firebaseListenersMap.put(dataSnapshot.getRef(),listener );
 
                 }
-
                 @Override
                 public void onCancelled (DatabaseError databaseError){
 
                 }
         });
-
-        /*brotherhoods = new ArrayList<>();
-        // Get a set of all the names from the shared preference
-        Set<String> names = prefs.getStringSet(broNames, null);
-        if (names != null) {
-            // Add the set to the hashset brotherhoodNames
-            brotherhoodNames.addAll(names);
-
-            // Add the names to the recycleview
-            for (String name : brotherhoodNames) {
-                addBrotherhoodList(name);
-            }
-        }*/
 
     }
 
@@ -234,10 +211,7 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
 
     private void connectToDB(String users, final String username) {
 
-
         myRef = database.getReference(users);
-
-
         myRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -245,11 +219,8 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
 
                     List<String> id = new ArrayList<>();
                     id.add("");
-
                     myRef.child(username).child("Brotherhood").child("BrotherhoodName").setValue(id);
-                    System.out.println("------------- Doesn't Exist ------------" + dataSnapshot.toString());
                 }
-
             }
 
             @Override
@@ -310,16 +281,19 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
                     Map<String, String> userMap = new HashMap<>();
                     userMap.put(user,"");
                     // Add Debt
-                    myRef.child(brotherhoodName).child("Users").child("Debt").setValue(userMap);
+                    myRef.child(brotherhoodName).child("Debt").setValue(userMap);
                     // Add Payment
-                    myRef.child(brotherhoodName).child("Users").child("Payment").setValue(userMap);
+                    myRef.child(brotherhoodName).child("Payment").setValue(userMap);
+
+                    // Add Users
+                    List<String> userList = new ArrayList<>();
+                    userList.add(user);
+                    myRef.child(brotherhoodName).child("Users").setValue(userList);
                     // Add Admin
                     Map<String, Boolean> adminMap = new HashMap<>();
                     adminMap.put(user,true);
                     myRef.child(brotherhoodName).child("Admin").setValue(adminMap);
-
                 }
-
             @Override
             public void onCancelled (DatabaseError databaseError){
 
@@ -327,18 +301,6 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
         } ;
 
         myRef.child(user).child("Brotherhood").child("BrotherhoodName").addListenerForSingleValueEvent(valueEventListener);
-
-
-
-        //            myRef = database... Brotherhood - BroName Array - Cat Array / Users
-
-
-       /* // Add the name to the set
-        brotherhoodNames.add(result);
-        // Then save in the shared preference
-        prefs.edit().putStringSet(broNames, brotherhoodNames).apply();
-        // Eventually add to the recycleview
-        addBrotherhoodList(result);*/
         Toast.makeText(this, "Added " + result, Toast.LENGTH_SHORT).show();
     }
 
@@ -376,32 +338,6 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
         // Remove the brotherhood from the user
         myRef = database.getReference("Users");
         myRef.child(user).child("Brotherhood").child("BrotherhoodName").setValue(listUpdated);
-              /*  addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                List<String> listUpdated = new ArrayList<>();
-                // Read the values from the DB and add to a list of String
-                for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
-                    if (dataTest.getValue() != null && !dataTest.getValue().toString().isEmpty()) {
-                        listUpdated.add(dataTest.getValue().toString());
-
-                    }
-                }
-                // Remove selected item from the list
-                listUpdated.remove(itemName);
-                // Then update the brotherhood list without the removed item
-                myRef.child(user).child("Brotherhood").child("BrotherhoodName").setValue(listUpdated);
-
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
 
         // Delete the Brother if this user is the Admin
         myRef = database.getReference("Brotherhood");
@@ -409,40 +345,33 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        System.out.println("***********************************" + dataSnapshot.getValue() + "   " + dataSnapshot.getKey());
-
                         // The user is the Admin
-                        if(dataSnapshot.getValue() != null && dataSnapshot.getValue().toString().contains(user)){
-                            // Delete the Brotherhood
-                            myRef.child(itemName).setValue(null);
-                        }
-                       /* List<String> listUpdated = new ArrayList<>();
-                        // Read the values from the DB and add to a list of String
-                        for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
-                            if (dataTest.getValue() != null && !dataTest.getValue().toString().isEmpty()) {
-                                listUpdated.add(dataTest.getValue().toString());
+                        if(dataSnapshot.getValue() != null){
+                            boolean isAdmin = false;
+                            String result = dataSnapshot.getValue().toString().replace("{","").replace("}","");
+                            String [] resultArr = result.split("=");
+                            String name = resultArr[0];
+                            isAdmin = Boolean.parseBoolean(resultArr[1]);
+                            // User is the Admin -> Delete the Brotherhood
+                            if(isAdmin && name.equals(user)) {
+                                // Delete the Brotherhood
+                                myRef.child(itemName).setValue(null);
+                            } else { // Not Admin -> Remove from Brotherhood
 
+                                Map<String, Object> userMap = new HashMap<>();
+                                userMap.put(user,null);
+                                // Add Debt
+                                myRef.child(itemName).child("Debt").updateChildren(userMap);
+                                // Add Payment
+                                myRef.child(itemName).child("Payment").updateChildren(userMap);
                             }
                         }
-                        // Remove selected item from the list
-                        listUpdated.remove(itemName);
-                        // Then update the brotherhood list without the removed item
-                        myRef.child(user).child("Brotherhood").child("BrotherhoodName").setValue(listUpdated);*/
-
-
-
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
                 });
-/*
-        // First remove the item_brotherhood from the RecyclerView
-        brotherhoodNames.remove(itemName);
-        // Secondly overwrite the new list(StringSet) in the share preference
-        prefs.edit().putStringSet(broNames, brotherhoodNames).apply();*/
     }
 
 

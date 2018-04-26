@@ -12,12 +12,19 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.user.mybrotherhood.R;
 import com.example.user.mybrotherhood.adapters.PagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,9 +33,12 @@ import java.util.Set;
 
 public class BrotherhoodTabs extends AppCompatActivity {
 
-    private SharedPreferences pref;
-    private final static String PREF_NAME = "members_name", memNames = "names";
-    private Set<String> memberNamesSet = new HashSet<>();
+    private DatabaseReference myRef;
+    private FirebaseDatabase database;
+    private FirebaseAuth mAuth;
+    private String user;
+    // Only other activities in the package can use this String
+    static final String FOUND_USERS_LIST = "FOUND_USERS_LIST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +50,15 @@ public class BrotherhoodTabs extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        pref = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        // Firebase Authentication
+        mAuth = FirebaseAuth.getInstance();
+        // Get user which is signed in
+        user = mAuth.getCurrentUser().getDisplayName();
 
-        // Test in adding names
-        memberNamesSet.add("Vlad");
-        memberNamesSet.add("Trynx");
-        memberNamesSet.add("Tommi");
-        memberNamesSet.add("Koichy");
-        pref.edit().putStringSet(memNames, memberNamesSet).apply();
+        // Firebase Database
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Brotherhood");
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.ingrouptab);
         tabLayout.addTab(tabLayout.newTab().setText("Payment"));
@@ -88,20 +99,43 @@ public class BrotherhoodTabs extends AppCompatActivity {
     private void handleIntent(Intent intent){
 
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-            String query = intent.getStringExtra(SearchManager.QUERY).toLowerCase();
+            // Get the search value , also convert to lower case for easier search
+            final String query = intent.getStringExtra(SearchManager.QUERY).toLowerCase();
             // Continue the search with the query in the DB
             if (!query.isEmpty()) {
-                // Search in DB
-                pref.getStringSet(memNames, memberNamesSet);
-                System.out.println("Names: " + memberNamesSet.toString()); // TEST
-//                if (memberNamesSet.contains(query)) {
-                    for (String memberName : memberNamesSet) {
-                        if (memberName.equalsIgnoreCase(query)) {
-                            System.out.println("Found");
-                            Toast.makeText(this,"Found member: " + memberName,Toast.LENGTH_SHORT).show();
+                // Get Users from the Brotherhood
+                myRef = database.getReference("Users");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<String> listUpdated = new ArrayList<>();
+                        // Iterate through all the Users and add to a list
+                        for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
+                                String userName = dataTest.getKey();
+                            System.out.println("**********" + userName);
+
+                            // Compare - true when it contain the sequel
+                                if (!userName.isEmpty() && userName.toLowerCase().contains(query)) {
+                                    listUpdated.add(userName);
+                                    System.out.println("**********" + userName);
+                                }
                         }
+
+                        // If list not empty
+                        if(listUpdated.size() > 0){
+                            // Start a new activity with the founded user list
+                            Intent intent = new Intent(getBaseContext(), FoundUserActivity.class);
+                            // Send the list to the next activity
+                            intent.putExtra(FOUND_USERS_LIST,listUpdated.toArray(new String[listUpdated.size()]));
+                            startActivity(intent);
+                        }
+
                     }
-//                }
+                    @Override
+                    public void onCancelled (DatabaseError databaseError){
+
+                    }
+                });
             }
         }
     }
@@ -125,7 +159,7 @@ public class BrotherhoodTabs extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_add_member:
                 System.out.println("Baah");
-                startActivity(new Intent(this, AddMemberActivity.class));
+                startActivity(new Intent(this, ShowUsersActivity.class));
         }
         return false;
     }

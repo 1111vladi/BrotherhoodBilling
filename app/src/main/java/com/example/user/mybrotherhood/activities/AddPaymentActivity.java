@@ -42,6 +42,7 @@ public class AddPaymentActivity extends AppCompatActivity{
         System.out.println("Name: " + selectedCategoryName + ", amount: " + amount.getText().toString()); // TEST
         // TODO - add the categoryName + amount to the DB
 
+
     }
 
     public void setSelectedCategoryName(String categoryName){

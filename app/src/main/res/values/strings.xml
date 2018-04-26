@@ -36,6 +36,10 @@
     <string name="status_verification_succeeded">Verification succeeded</string>
     <string name="status_sign_in_failed">Sign-in failed</string>
     <string name="instant_validation">(instant validation)</string>
+    <string name="add_user">Add User</string>
+    <string name="show_users">Users</string>
+
+
 
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="firebase_user_management">Firebase User Management</string>
