@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/createbrotherhood"
     tools:context="com.example.user.mybrotherhood.activities.AddPaymentActivity"
     android:padding="@dimen/cv_padding"
 
@@ -11,6 +12,7 @@
 
     <!--Amount label with number input-->
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -21,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_amount"
+            android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_normal"
             />
 
@@ -30,7 +33,7 @@
             android:layout_width="@dimen/text_length_normal"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_amount"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:textSize="@dimen/text_size_normal"
 
 
@@ -43,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_amount"
+        android:textColor="#FFFFFF"
         android:textSize="@dimen/text_size_normal"
         android:text="@string/label_category"
 

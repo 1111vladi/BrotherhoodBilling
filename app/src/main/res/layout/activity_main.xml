@@ -22,31 +22,19 @@
                 android:contentDescription="@string/desc_firebase_lockup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_normal"
-                android:text="Fragment Test"
-                android:onClick="toFragment"
-                />
 
-            <TextView
-                android:id="@+id/title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/title_bottom_margin"
-                android:text="@string/google_title_text"
-                android:theme="@style/ThemeOverlay.MyTitleText" />
+
+
 
             <TextView
                 android:id="@+id/status"
                 style="@style/ThemeOverlay.MyTextDetail"
-                android:text="@string/signed_out" />
+                 />
 
             <TextView
                 android:id="@+id/detail"
                 style="@style/ThemeOverlay.MyTextDetail"
-                tools:text="Firebase User ID: 123456789abc" />
+                 />
 
 
 

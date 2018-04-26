@@ -90,6 +90,9 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
         connectToDB("Users", user);
 
 
+
+
+
         // Change Status bar background
         Window window = this.getWindow();
 
@@ -99,8 +102,8 @@ public class CreateBrotherhoodActivity extends AppCompatActivity implements
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.grey_500));
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.teal_800));
 
 
 

@@ -6,7 +6,7 @@
     tools:context="com.example.user.mybrotherhood.fragments.Debt">
 
 <android.support.v7.widget.RecyclerView
-    android:layout_marginTop="55dp"
+    android:layout_marginTop="100dp"
     android:id="@+id/RV_debt"
     android:layout_height="match_parent"
     android:layout_width="match_parent">

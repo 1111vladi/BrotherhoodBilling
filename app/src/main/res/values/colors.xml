@@ -9,6 +9,12 @@
     <color name="grey_500">#9E9E9E</color>
     <color name="grey_800">#424242</color>
 
+    <color name="teal_800">#00695C</color>
+    <color name="teal_500">#009688</color>
+    <color name="teal_700">#00796B</color>
+
+    <color name="green_700">#388E3C</color>
+
     <color name="black">#000000</color>
 
     <!-- Color CardView selected -->

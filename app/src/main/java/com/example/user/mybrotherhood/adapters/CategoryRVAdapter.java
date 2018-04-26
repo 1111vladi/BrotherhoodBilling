@@ -87,9 +87,12 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Ca
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         holder.categoryName.setText(categories.get(position).categoryName); //  Which text to display
+
         // This is the background color of an item before any other action was take,
         // the first item will be colored -> color = selected
-        holder.categoryCv.setCardBackgroundColor(selectedPos == position ? Color.GREEN : Color.TRANSPARENT);
+
+        holder.categoryCv.setCardBackgroundColor(selectedPos == position ? Color.GREEN : Color.WHITE);
+
     }
 
     @Override
