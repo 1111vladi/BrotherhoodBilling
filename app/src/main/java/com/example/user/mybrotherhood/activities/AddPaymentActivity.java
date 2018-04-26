@@ -67,8 +67,6 @@ public class AddPaymentActivity extends AppCompatActivity{
     // Button Add Payment
     public void addPayment(View view) {
         System.out.println("Name: " + selectedCategoryName + ", amount: " + amount.getText().toString()); // TEST
-        // TODO - add the categoryName + amount to the DB
-
 
         myRef = database.getReference("Brotherhood");
         myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -94,9 +92,8 @@ public class AddPaymentActivity extends AppCompatActivity{
                     mapInsert.put(name,eachUserCount);
                     // Add into each user Debt the amount
                     myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Debt").child(name).updateChildren(mapInsert);
-                    // Add this user Paymnet the amount
-                    myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Paymnet").child(user).updateChildren(mapInsert);
-
+                    // Add this user Payment the amount
+                    myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Payment").child(user).updateChildren(mapInsert);
                 }
 
             }

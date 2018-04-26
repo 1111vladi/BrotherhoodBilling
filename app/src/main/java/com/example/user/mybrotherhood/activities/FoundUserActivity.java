@@ -107,11 +107,13 @@ public class FoundUserActivity extends AppCompatActivity implements FoundUserRVA
                 listUpdated.add(userSelected);
                 for (String name : listUpdated) {
                     // Only add if the user doesn't exist in the list
-                    if (!name.equals(user) && !name.isEmpty()) {
-                        myRef = database.getReference("Brotherhood");
-                        myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Users").setValue(listUpdated);
+                    if (name.equals(user) && name.isEmpty()) {
+                        listUpdated.remove(name);
                     }
                 }
+                myRef = database.getReference("Brotherhood");
+                myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Users").setValue(listUpdated);
+
             }
 
             @Override

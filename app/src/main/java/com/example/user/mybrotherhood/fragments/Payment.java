@@ -30,6 +30,12 @@ public class Payment extends Fragment {
             }
         });
 
+        // Goes to the detail Button
+        String [] detailArr = {"Payment", "Name"};
+        // Send data to the dialog
+        Bundle bundle = new Bundle();
+        bundle.putStringArray("KEY", detailArr); // Get data From Payment / Debt , Name
+        setArguments(bundle);
 
         return rootView;
     }
