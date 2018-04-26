@@ -108,7 +108,6 @@ public class MainLoginActivity extends BaseActivity implements
 
 
 
-
     }
 
     // ------------ onStart check user START ------------

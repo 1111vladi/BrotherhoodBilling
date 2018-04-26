@@ -18,10 +18,20 @@
         </activity>
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.CreateBrotherhoodActivity" />
-        <activity android:name=".activities.BrotherhoodTabs" />
+
+        <activity android:name=".activities.BrotherhoodTabs"
+            android:theme="@style/ThemeOverlay.MyNoTitleActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/> </activity>
+
         <activity android:name=".cardviewactivity.CardViewActivity" />
         <activity android:name=".activities.BaseActivity"/>
         <activity android:name=".activities.AddPaymentActivity" />
+        <activity android:name=".activities.AddMemberActivity" />
     </application>
 
 </manifest>

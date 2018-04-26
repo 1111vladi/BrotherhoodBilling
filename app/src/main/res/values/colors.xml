@@ -13,4 +13,5 @@
 
     <!-- Color CardView selected -->
     <color name="cv_selected">#117361</color>
+
 </resources>
