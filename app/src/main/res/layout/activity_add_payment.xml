@@ -6,8 +6,6 @@
     android:background="@drawable/createbrotherhood"
     tools:context="com.example.user.mybrotherhood.activities.AddPaymentActivity"
     android:padding="@dimen/cv_padding"
-
-
     >
 
     <!--Amount label with number input-->

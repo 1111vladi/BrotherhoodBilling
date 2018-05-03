@@ -2,8 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/payment"
     tools:context="com.example.user.mybrotherhood.fragments.Payment">
+
+    <!--android:background="@drawable/payment"-->
+
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="100dp"
