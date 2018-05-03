@@ -3,7 +3,6 @@ package com.example.user.mybrotherhood.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -15,8 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
+import com.example.user.mybrotherhood.FirebaseBrotherhood;
 import com.example.user.mybrotherhood.R;
 import com.example.user.mybrotherhood.adapters.PagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by user on 3/21/2018.
@@ -37,7 +34,8 @@ import java.util.Set;
 
 public class BrotherhoodTabs extends AppCompatActivity {
 
-    private DatabaseReference myRef;
+    private DatabaseReference myRefUsers;
+    private DatabaseReference myRefBrotherhood;
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private String user;
@@ -73,7 +71,8 @@ public class BrotherhoodTabs extends AppCompatActivity {
 
         // Firebase Database
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Brotherhood");
+        myRefBrotherhood = database.getReference("Brotherhood");
+        myRefUsers = database.getReference("Users");
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.ingrouptab);
@@ -119,39 +118,61 @@ public class BrotherhoodTabs extends AppCompatActivity {
             final String query = intent.getStringExtra(SearchManager.QUERY).toLowerCase();
             // Continue the search with the query in the DB
             if (!query.isEmpty()) {
-                // Get Users from the Brotherhood
-                myRef = database.getReference("Users");
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                myRefBrotherhood.child(FirebaseBrotherhood.getBrotherhoodName()).child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        List<String> listUpdated = new ArrayList<>();
+
+                        final List<String> userList = new ArrayList<>();
                         // Iterate through all the Users and add to a list
                         for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
-                                String userName = dataTest.getKey();
-                            System.out.println("**********" + userName);
+                            String userName = dataTest.getKey();
 
-                            // Compare - true when it contain the sequel
-                                if (!userName.isEmpty() && userName.toLowerCase().contains(query)) {
-                                    listUpdated.add(userName);
-                                    System.out.println("**********" + userName);
+                            // Compare - true when it contain the sequel ; Don't add the user which is doing the searching
+                            if (!userName.isEmpty() && userName.toLowerCase().contains(query) && !userName.equals(user)) {
+                                userList.add(userName);
+                            }
+                        }
+
+                        // Get Users from the Brotherhood
+                        myRefUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                List<String> listUpdated = new ArrayList<>();
+                                // Iterate through all the Users and add to a list
+                                for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
+                                    String userName = dataTest.getKey();
+
+                                    // Compare - true when it contain the sequel ; Don't add the user which is doing the searching
+                                    if (!userName.isEmpty() && userName.toLowerCase().contains(query) && !userName.equals(user)) {
+                                        listUpdated.add(userName);
+                                    }
                                 }
-                        }
+                                // Remove all users which already are in the Brotherhood
+                                listUpdated.removeAll(userList);
 
-                        // If list not empty
-                        if(listUpdated.size() > 0){
-                            // Start a new activity with the founded user list
-                            Intent intent = new Intent(getBaseContext(), FoundUserActivity.class);
-                            // Send the list to the next activity
-                            intent.putExtra(FOUND_USERS_LIST,listUpdated.toArray(new String[listUpdated.size()]));
-                            startActivity(intent);
-                        }
+                                // If list not empty
+                                if(listUpdated.size() > 0){
+                                    // Start a new activity with the founded user list
+                                    Intent intent = new Intent(getBaseContext(), FoundUserActivity.class);
+                                    // Send the list to the next activity
+                                    intent.putExtra(FOUND_USERS_LIST,listUpdated.toArray(new String[listUpdated.size()]));
+                                    startActivity(intent);
+                                }
 
+                            }
+                            @Override
+                            public void onCancelled (DatabaseError databaseError){
+
+                            }
+                        });
                     }
+
                     @Override
-                    public void onCancelled (DatabaseError databaseError){
+                    public void onCancelled(DatabaseError databaseError) {
 
                     }
                 });
+
             }
         }
     }

@@ -38,7 +38,6 @@ public class BrotherhoodRVAdapter extends RecyclerView.Adapter<BrotherhoodRVAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("*******************" + brotherhoodName.getText().toString());
                     FirebaseBrotherhood.setBrotherhoodName(brotherhoodName.getText().toString());
                     view.getContext().startActivity(new Intent(view.getContext(), BrotherhoodTabs.class));
                 }

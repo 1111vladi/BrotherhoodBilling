@@ -67,7 +67,7 @@ public class ShowUsersActivity extends AppCompatActivity {
 
                 for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
                     if (dataTest.getValue() != null && !dataTest.getValue().toString().isEmpty()) {
-                        listUpdated.add(dataTest.getValue().toString());
+                        listUpdated.add(dataTest.getKey());
 
                     }
                 }

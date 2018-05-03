@@ -21,7 +21,7 @@ import java.util.List;
 public class FoundUserRVAdapter extends RecyclerView.Adapter<FoundUserRVAdapter.FoundUserViewHolder>{
 
     // Position of the selected item all the time
-    private int selectedPos = 0;
+    private int selectedPos = RecyclerView.NO_POSITION;
 
     private List<String> foundUsers;
     private FoundUserOnClickListener foundUserListener;

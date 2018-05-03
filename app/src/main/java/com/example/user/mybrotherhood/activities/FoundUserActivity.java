@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.ArraySet;
 import android.view.View;
 
 import com.example.user.mybrotherhood.FirebaseBrotherhood;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.example.user.mybrotherhood.activities.BrotherhoodTabs.FOUND_USERS_LIST;
 
@@ -38,7 +40,8 @@ public class FoundUserActivity extends AppCompatActivity implements FoundUserRVA
     private String userSelected = "";
 
     private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private DatabaseReference myRefBrotherhood;
+    private DatabaseReference myRefUsers;
     private static final String TAG_DB = "tag_db";
     private List<String> foundUsersList;
     private RecyclerView rv;
@@ -69,6 +72,8 @@ public class FoundUserActivity extends AppCompatActivity implements FoundUserRVA
 
         // Firebase Database
         database = FirebaseDatabase.getInstance();
+        myRefBrotherhood = database.getReference("Brotherhood");
+        myRefUsers = database.getReference("Users");
 
     }
 
@@ -88,41 +93,22 @@ public class FoundUserActivity extends AppCompatActivity implements FoundUserRVA
 
     // Button Add User Action
     public void addUser(View view) {
+        // Add to Brotherhood Users list
+        Map<String, Object> newUserMap = new HashMap<>();
+        newUserMap.put(userSelected,true);
+        myRefBrotherhood.child(FirebaseBrotherhood.getBrotherhoodName()).child("Users").updateChildren(newUserMap); // Can't use parameter set -> So use a List instead
 
-        // Delete the Brother if this user is the Admin
-        myRef = database.getReference("Users");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        // Add Debt & Payment
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put(userSelected,"");
+        myRefBrotherhood.child(FirebaseBrotherhood.getBrotherhoodName()).child("Debt").updateChildren(userMap);
+        myRefBrotherhood.child(FirebaseBrotherhood.getBrotherhoodName()).child("Payment").updateChildren(userMap);
 
-                List<String> listUpdated = new ArrayList<>();
-                // Iterate through the data and add to a list
-                for (DataSnapshot dataTest : dataSnapshot.getChildren()) {
-                    if (dataTest.getValue() != null && !dataTest.getValue().toString().isEmpty()) {
-                        listUpdated.add(dataTest.getKey());
+        // Add to User Brotherhood list
+        Map<String, Object> newBrotherhoodMap = new HashMap<>();
+        newBrotherhoodMap.put(FirebaseBrotherhood.getBrotherhoodName(),true);
+        myRefUsers.child(userSelected).child("Brotherhood").child("BrotherhoodName").updateChildren(newBrotherhoodMap);  // Can't use parameter set -> So use a List instead
 
-                    }
-                }
-                // Add the new user to the list
-                listUpdated.add(userSelected);
-                for (String name : listUpdated) {
-                    // Only add if the user doesn't exist in the list
-                    if (name.equals(user) && name.isEmpty()) {
-                        listUpdated.remove(name);
-                    }
-                }
-                myRef = database.getReference("Brotherhood");
-                myRef.child(FirebaseBrotherhood.getBrotherhoodName()).child("Users").setValue(listUpdated);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        // Done adding the user -> Back to Brotherhood Tabs
         finish();
     }
 
